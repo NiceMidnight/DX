@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.core.dao.UserDao" >
+    <!-- 查询用户 -->
+    <select id="findUser" parameterType="String" resultType="user">
+	    select *
+	    from sys_user
+	    where user_code = #{usercode}
+	    and user_password =#{password}
+	    and user_state = '1'
+    </select>
+	<!-- 查询管理员列表 -->
+	<select id="selectManageList" parameterType="user" resultType="user">
+		select * from sys_user
+	</select>
+	<select id="selectManageListCount" parameterType="user" resultType="Integer">
+			select count(*) from sys_user
+	</select>
+	<insert id="createManage">
+		insert into sys_user set user_code=#{new_manageCode},user_name=#{new_manageName},
+		                         user_password=#{new_managePassword},user_state=#{new_manageState}
+	</insert>
+	<delete id="deleteManage">
+		delete from sys_user where user_id=#{manage_id}
+	</delete>
+</mapper>
